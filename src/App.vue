@@ -9,12 +9,12 @@
       <y-button type="danger">危险按钮</y-button>
     </div>
     <div class="row">
-      <y-button plain>默认按钮</y-button>
-      <y-button type="success" plain>成功按钮</y-button>
-      <y-button type="primary" plain>主要按钮</y-button>
-      <y-button type="info" plain>主要按钮</y-button>
-      <y-button type="warning" plain>警告按钮</y-button>
-      <y-button type="danger" plain>危险按钮</y-button>
+      <y-button plain disabled>默认按钮</y-button>
+      <y-button type="success" plain disabled>成功按钮</y-button>
+      <y-button type="primary" plain disabled>主要按钮</y-button>
+      <y-button type="info" plain disabled>主要按钮</y-button>
+      <y-button type="warning" plain disabled>警告按钮</y-button>
+      <y-button type="danger" plain disabled>危险按钮</y-button>
     </div>
      <div class="row">
       <y-button round>默认按钮</y-button>
@@ -25,7 +25,7 @@
       <y-button type="danger" round icon='delete'>危险按钮</y-button>
     </div>
      <div class="row">
-      <y-button circle icon='delete'></y-button>
+      <y-button circle icon='delete' @click="deleteClick"></y-button>
       <y-button type="success" circle icon='success'></y-button>
       <y-button type="success" circle icon='success'></y-button>
       <y-button type="primary" circle icon='email'></y-button>
@@ -39,7 +39,12 @@
 <script>
 export default {
   name: 'App',
-  components: {}
+  components: {},
+  methods: {
+    deleteClick (e) {
+      console.log('deleteClick', e)
+    }
+  }
 }
 </script>
 

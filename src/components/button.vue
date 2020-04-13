@@ -1,9 +1,12 @@
 <template>
-  <button class="y-button" :class="buttonClasses">
-    <slot v-if="icon" name='icon'>
-      <y-icon :name="icon"></y-icon>
-    </slot>
-    <span>
+  <button
+    class="y-button"
+    :class="buttonClasses"
+    @click="$emit('click', $event)"
+    :disabled='disabled'
+  >
+    <y-icon :name="icon" v-if="icon"></y-icon>
+    <span v-if="$slots.default">
       <slot></slot>
     </span>
   </button>
@@ -14,7 +17,7 @@ export default {
   name: 'yButton',
   data () {
     return {
-      hasContent: true
+      // hasContent: true
     }
   },
   props: {
@@ -35,7 +38,12 @@ export default {
       default: false
     },
     icon: {
-      type: String
+      type: String,
+      default: ''
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -45,16 +53,17 @@ export default {
         this.plain ? 'is-plain' : '',
         { 'is-round': this.round },
         { 'is-circle': this.circle },
-        { 'has-content': this.hasContent }
+        { 'is-disabled': this.disabled }
       ]
     }
   },
   mounted () {
-    const content = this.$el.querySelector('span').innerHTML
-    if (!content) {
-      this.hasContent = false
-    }
-    // console.log(this.hasContent)
+    // const content = this.$el.querySelector('span').innerHTML
+    // if (!content) {
+    //   this.hasContent = false
+    // }
+    // // console.log(this.hasContent)
+    // console.log(this.$slots)
   }
 }
 </script>
@@ -89,7 +98,7 @@ export default {
     border-radius: 50%;
     padding: 12px;
   }
-  &.has-content [class*="icon-"] + span {
+  [class*="icon-"] + span {
     margin-left: 5px;
   }
 }
@@ -105,6 +114,15 @@ export default {
     background: #fff;
     border-color: #409eff;
     color: #409eff;
+  }
+  &.is-disabled,
+  &.is-disabled:hover,
+  &.is-disabled:focus {
+    color: #c0c4cc;
+    cursor: not-allowed;
+    background-image: none;
+    background-color: #fff;
+    border-color: #ebeef5;
   }
 }
 .y-button-success {
@@ -128,6 +146,15 @@ export default {
     border-color: #67c23a;
     color: #fff;
   }
+  &.is-disabled,
+  &.is-disabled:hover,
+  &.is-disabled:focus {
+    cursor: not-allowed;
+    background-image: none;
+    color: #fff;
+    background-color: #b3e19d;
+    border-color: #b3e19d;
+  }
 }
 .y-button-primary {
   color: #fff;
@@ -149,6 +176,15 @@ export default {
     background: #409eff;
     border-color: #409eff;
     color: #fff;
+  }
+  &.is-disabled,
+  &.is-disabled:hover,
+  &.is-disabled:focus {
+    cursor: not-allowed;
+    background-image: none;
+    color: #fff;
+    background-color: #a0cfff;
+    border-color: #a0cfff;
   }
 }
 .y-button-info {
@@ -172,6 +208,15 @@ export default {
     border-color: #909399;
     color: #fff;
   }
+  &.is-disabled,
+  &.is-disabled:hover,
+  &.is-disabled:focus {
+    cursor: not-allowed;
+    background-image: none;
+    color: #fff;
+    background-color: #c8c9cc;
+    border-color: #c8c9cc;
+  }
 }
 .y-button-warning {
   color: #fff;
@@ -194,6 +239,15 @@ export default {
     border-color: #e6a23c;
     color: #fff;
   }
+  &.is-disabled,
+  &.is-disabled:hover,
+  &.is-disabled:focus {
+    cursor: not-allowed;
+    background-image: none;
+    color: #fff;
+    background-color: #f3d19e;
+    border-color: #f3d19e;
+  }
 }
 .y-button-danger {
   color: #fff;
@@ -215,6 +269,15 @@ export default {
     background: #f56c6c;
     border-color: #f56c6c;
     color: #fff;
+  }
+  &.is-disabled,
+  &.is-disabled:hover,
+  &.is-disabled:focus {
+    cursor: not-allowed;
+    background-image: none;
+    color: #fff;
+    background-color: #fab6b6;
+    border-color: #fab6b6;
   }
 }
 </style>
